@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useReducer, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [title, setTitle] = useState();
+  const [color, setColor] = useState("#000");
+
+  const submit = (e) => {
+    e.preventDefault();
+    alert(`title: ${title}, color: ${color}`);
+    setTitle("");
+    setColor("");
+  };
+
+  const [emotion, setEmotion] = useState("Happy");
+  const [checked, setChecked] = useReducer((checked) => !checked, false);
+
+  useEffect(() => {
+    console.log(`first emotion is ${emotion}`);
+  }, [emotion]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1> Form Handling with useRef</h1>
+
+      <form onSubmit={submit}>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+          placeholder="title"
+        />
+        <input
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+          type="color"
+        />
+        <button>Click</button>
+      </form>
+
+      <h1>Our Emotion {emotion}</h1>
+      <button onClick={() => setEmotion("Sad")}>Sad</button>
+      <button onClick={() => setEmotion("Calm")}>calm</button>
+
+      <h1>Check box use Reducer hook</h1>
+      <input
+        type="checkbox"
+        value={checked}
+        onClick={() => {
+          setChecked();
+        }}
+      />
+      <label>{checked ? "checked" : "not checked"}</label>
     </div>
   );
 }
