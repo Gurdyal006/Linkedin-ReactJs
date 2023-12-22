@@ -4,7 +4,7 @@ import "./App.css";
 
 function GitHubUser({ name, company, image }) {
   return (
-    <div>
+    <div className="App">
       <h1>{name}</h1>
       <p>{company}</p>
       <p>

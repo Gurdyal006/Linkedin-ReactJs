@@ -51,7 +51,7 @@ function Graphql() {
   if (!data) return null;
 
   return (
-    <div>
+    <div className="App">
       {data.data.countries.map((data, i) => (
         <Lift
           name={data.name}
